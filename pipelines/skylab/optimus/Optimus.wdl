@@ -1,10 +1,10 @@
 version 1.0
 
-import "../../../tasks/skylab/StarAlign.wdl" as StarAlign
-import "../../../tasks/skylab/Metrics.wdl" as Metrics
-import "../../../tasks/skylab/RunEmptyDrops.wdl" as RunEmptyDrops
-import "../../../tasks/skylab/LoomUtils.wdl" as LoomUtils
-import "../../../tasks/skylab/OptimusInputChecks.wdl" as OptimusInputChecks
+import "https://raw.githubusercontent.com/broadinstitute/warp/develop/tasks/skylab/StarAlign.wdl" as StarAlign
+import "https://raw.githubusercontent.com/broadinstitute/warp/develop/tasks/skylab/Metrics.wdl" as Metrics
+import "https://raw.githubusercontent.com/broadinstitute/warp/develop/tasks/skylab/RunEmptyDrops.wdl" as RunEmptyDrops
+import "https://raw.githubusercontent.com/broadinstitute/warp/develop/tasks/skylab/LoomUtils.wdl" as LoomUtils
+import "https://raw.githubusercontent.com/broadinstitute/warp/develop/tasks/skylab/OptimusInputChecks.wdl" as OptimusInputChecks
 
 workflow Optimus {
   meta {

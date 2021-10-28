@@ -18,7 +18,7 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && apt-get update
 RUN apt-get install -y \
     build-essential \
     wget \
-    python \
+    python3.8 \
     python-pip \
     && apt-get build-dep -y r-base
 
