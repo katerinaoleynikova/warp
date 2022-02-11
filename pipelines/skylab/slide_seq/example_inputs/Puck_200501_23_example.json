@@ -1,8 +1,0 @@
-
-{
-  "SlideSeq.r1_fastq": ["Puck_200501_23.read1.fastq.gz"],
-  "SlideSeq.r2_fastq": ["Puck_200501_23.read2.fastq.gz"],
-  "SlideSeq.umi_length": "9",
-  "SlideSeq.cell_barcode_length": "14",
-  "SlideSeq.sample_id": "Puck_200501_23"
-}

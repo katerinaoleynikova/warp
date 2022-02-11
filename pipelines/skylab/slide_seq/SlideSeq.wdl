@@ -27,9 +27,13 @@ workflow SlideSeq{
         Array[File] r2_fastq
         Array[File]? i1_fastq
         String sample_id
+        String read_structure
+        String tar_star_reference
 
-        Int cell_barcode_length
+        #TODO eventually get rid of these inputs and just use read_structure. But to do this, we need to fix fastqprocess first
         Int umi_length
+        Int cell_barcode_length
+
     }
 
     parameter_meta {
