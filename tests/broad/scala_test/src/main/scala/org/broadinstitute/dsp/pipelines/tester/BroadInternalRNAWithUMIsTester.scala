@@ -105,6 +105,46 @@ class BroadInternalRNAWithUMIsTester(
         truthCloudPath.resolve(s"$outputBaseName.metrics.tsv"),
         truthCloudPath.resolve(s"$outputBaseName.unified_metrics.txt")
       ),
+      test_star_aligned_bam = resultsCloudPath.resolve("Aligned.out.bam"),
+      truth_star_aligned_bam = truthCloudPath.resolve("Aligned.out.bam"),
+      test_star_transcriptome_bam =
+        resultsCloudPath.resolve("Aligned.toTranscriptome.out.bam"),
+      truth_star_transcriptome_bam =
+        truthCloudPath.resolve("Aligned.toTranscriptome.out.bam"),
+      test_one_bam = resultsCloudPath.resolve(
+        s"$outputBaseName.STAR_aligned.coordinate_sorted.bam"),
+      truth_one_bam = truthCloudPath.resolve(
+        s"$outputBaseName.STAR_aligned.coordinate_sorted.bam"),
+      test_two_bam =
+        resultsCloudPath.resolve(s"$outputBaseName.grouped_by_UMI.bam"),
+      truth_two_bam =
+        truthCloudPath.resolve(s"$outputBaseName.grouped_by_UMI.bam"),
+      test_three_bam = resultsCloudPath.resolve(
+        s"$outputBaseName.grouped.queryname_sorted.bam"),
+      truth_three_bam =
+        truthCloudPath.resolve(s"$outputBaseName.grouped.queryname_sorted.bam"),
+      test_four_bam =
+        resultsCloudPath.resolve(s"$outputBaseName.duplicate_marked.bam"),
+      truth_four_bam =
+        truthCloudPath.resolve(s"$outputBaseName.duplicate_marked.bam"),
+      test_tzero_bam = resultsCloudPath.resolve(s"$outputBaseName.zero.bam"),
+      truth_tzero_bam = truthCloudPath.resolve(s"$outputBaseName.zero.bam"),
+      test_tone_bam = resultsCloudPath.resolve(
+        s"$outputBaseName.transcriptome.STAR_aligned.coordinate_sorted.bam"),
+      truth_tone_bam = truthCloudPath.resolve(
+        s"$outputBaseName.transcriptome.STAR_aligned.coordinate_sorted.bam"),
+      test_ttwo_bam = resultsCloudPath.resolve(
+        s"$outputBaseName.transcriptome.grouped_by_UMI.bam"),
+      truth_ttwo_bam = truthCloudPath.resolve(
+        s"$outputBaseName.transcriptome.grouped_by_UMI.bam"),
+      test_tthree_bam = resultsCloudPath.resolve(
+        s"$outputBaseName.transcriptome.grouped.queryname_sorted.bam"),
+      truth_tthree_bam = truthCloudPath.resolve(
+        s"$outputBaseName.transcriptome.grouped.queryname_sorted.bam"),
+      test_tfour_bam = resultsCloudPath.resolve(
+        s"$outputBaseName.transcriptome.duplicate_marked.bam"),
+      truth_tfour_bam = truthCloudPath.resolve(
+        s"$outputBaseName.transcriptome.duplicate_marked.bam"),
       test_output_bam = resultsCloudPath.resolve(
         s"$outputBaseName.duplicate_marked.coordinate_sorted.bam"),
       truth_output_bam = truthCloudPath.resolve(

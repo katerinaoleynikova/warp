@@ -68,6 +68,10 @@ workflow UMIAwareDuplicateMarking {
   }
 
   output {
+    File one_bam = SortSamByCoordinateFirstPass.output_bam
+    File two_bam = GroupByUMIs.grouped_bam
+    File three_bam = SortSamByQueryName.output_bam
+    File four_bam = MarkDuplicates.duplicate_marked_bam
     File duplicate_marked_bam = SortSamByCoordinateSecondPass.output_bam
     File duplicate_marked_bam_index = SortSamByCoordinateSecondPass.output_bam_index
     File duplicate_metrics = MarkDuplicates.duplicate_metrics

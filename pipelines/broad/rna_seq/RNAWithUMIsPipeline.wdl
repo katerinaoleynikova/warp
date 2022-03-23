@@ -114,7 +114,8 @@ workflow RNAWithUMIsPipeline {
   call tasks.CopyReadGroupsToHeader {
     input:
       bam_with_readgroups = STAR.aligned_bam,
-      bam_without_readgroups = STAR.transcriptome_bam
+      bam_without_readgroups = STAR.transcriptome_bam,
+      output_basename = output_basename + ".zero.bam"
   }
 
   call UmiMD.UMIAwareDuplicateMarking {
@@ -168,9 +169,22 @@ workflow RNAWithUMIsPipeline {
 
   output {
     String sample_name = GetSampleName.sample_name
+    File star_aligned_bam = STAR.aligned_bam
+    File star_transcriptome_bam = STAR.transcriptome_bam
+
+    File tzero_bam = CopyReadGroupsToHeader.output_bam
+    File tone_bam = UMIAwareDuplicateMarkingTranscriptome.one_bam
+    File ttwo_bam = UMIAwareDuplicateMarkingTranscriptome.two_bam
+    File tthree_bam = UMIAwareDuplicateMarkingTranscriptome.three_bam
+    File tfour_bam = UMIAwareDuplicateMarkingTranscriptome.four_bam
     File transcriptome_bam = UMIAwareDuplicateMarkingTranscriptome.duplicate_marked_bam
     File transcriptome_bam_index = UMIAwareDuplicateMarkingTranscriptome.duplicate_marked_bam_index
     File transcriptome_duplicate_metrics = UMIAwareDuplicateMarkingTranscriptome.duplicate_metrics
+
+    File one_bam = UMIAwareDuplicateMarking.one_bam
+    File two_bam = UMIAwareDuplicateMarking.two_bam
+    File three_bam = UMIAwareDuplicateMarking.three_bam
+    File four_bam = UMIAwareDuplicateMarking.four_bam
     File output_bam = UMIAwareDuplicateMarking.duplicate_marked_bam
     File output_bam_index = UMIAwareDuplicateMarking.duplicate_marked_bam_index
     File duplicate_metrics = UMIAwareDuplicateMarking.duplicate_metrics

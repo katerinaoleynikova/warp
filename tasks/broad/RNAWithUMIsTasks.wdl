@@ -214,6 +214,7 @@ task CopyReadGroupsToHeader {
   input {
     File bam_with_readgroups
     File bam_without_readgroups
+    String output_basename
 
     String docker = "us.gcr.io/broad-gotc-prod/samtools:1.0.0-1.11-1624651616"
     Int cpu = 1
@@ -221,12 +222,12 @@ task CopyReadGroupsToHeader {
     Int disk_size_gb = ceil(2.0 * size([bam_with_readgroups, bam_without_readgroups], "GiB")) + 10
   }
 
-  String basename = basename(bam_without_readgroups)
+#  String basename = basename(bam_without_readgroups)
 
   command <<<
     samtools view -H ~{bam_without_readgroups} > header.sam
     samtools view -H ~{bam_with_readgroups} | grep "@RG" >> header.sam
-    samtools reheader header.sam ~{bam_without_readgroups} > ~{basename}
+    samtools reheader header.sam ~{bam_without_readgroups} > ~{output_basename}
   >>>
 
   runtime {
@@ -237,7 +238,7 @@ task CopyReadGroupsToHeader {
   }
 
   output {
-    File output_bam = basename
+    File output_bam = output_basename
   }
 }
 
