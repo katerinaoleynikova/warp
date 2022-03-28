@@ -107,7 +107,7 @@ task STAR {
     File starIndex
 
     String docker = "us.gcr.io/broad-gotc-prod/samtools-star:1.0.0-1.11-2.7.10a-1642556627"
-    Int cpu = 8
+    Int cpu = 1
     Int memory_mb = ceil((size(starIndex, "GiB")) + 10) * 1500
     Int disk_size_gb = ceil(2.2 * size(bam, "GiB") + size(starIndex, "GiB")) + 150
   }
@@ -145,7 +145,8 @@ task STAR {
       --twopassMode Basic \
       --quantMode TranscriptomeSAM \
       --quantTranscriptomeBan Singleend \
-      --alignEndsProtrude 20 ConcordantPair
+      --alignEndsProtrude 20 ConcordantPair \
+      --runRNGseed 777
   >>>
 
   runtime {
