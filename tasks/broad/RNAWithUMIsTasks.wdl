@@ -601,17 +601,28 @@ task MarkDuplicatesUMIAware {
     File bam
     String output_basename
 
-    String docker = "us.gcr.io/broad-gatk/gatk:4.1.9.0"
+    String docker = "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.11"
     Int cpu = 1
-    Int memory_mb = 16000
+    Int memory_mb = 15000
     Int disk_size_gb = ceil(3 * size(bam, "GiB")) + 60
   }
 
+  Int java_memory_size = memory_mb - 1000
+  Int max_heap = memory_mb - 500
+
   String output_bam_basename = output_basename + ".duplicate_marked"
 
-  command <<<
-    gatk MarkDuplicates -I ~{bam} --READ_ONE_BARCODE_TAG BX -O ~{output_bam_basename}.bam --METRICS_FILE ~{output_basename}.duplicate.metrics --ASSUME_SORT_ORDER queryname
-  >>>
+  command {
+    java -Xms~{java_memory_size}m -Xmx~{max_heap}m -jar /usr/picard/picard.jar MarkDuplicates \
+      -I ~{bam} \
+      --READ_ONE_BARCODE_TAG BX \
+      -O ~{output_bam_basename}.bam \
+      --METRICS_FILE ~{output_basename}.duplicate.metrics \
+      --ASSUME_SORT_ORDER queryname
+  }
+#  command <<<
+#    gatk MarkDuplicates -I ~{bam} --READ_ONE_BARCODE_TAG BX -O ~{output_bam_basename}.bam --METRICS_FILE ~{output_basename}.duplicate.metrics --ASSUME_SORT_ORDER queryname
+#  >>>
 
   output {
     File duplicate_marked_bam = "~{output_bam_basename}.bam"
