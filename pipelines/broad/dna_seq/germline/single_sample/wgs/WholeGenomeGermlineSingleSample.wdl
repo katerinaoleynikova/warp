@@ -224,15 +224,26 @@ workflow WholeGenomeGermlineSingleSample {
       set -o errexit
       mkdir -p ~{output_dir}
       smoove call \
-      --name ~{sample} \
+      --name ~{sample_name} \
       --fasta ~{ref_fasta} \
       --genotype ~{bamFile} \
       --outdir ~{output_dir} 
     }
     
+    output {
+      File smoove_vcf = output_dir + "/" + sample_name + "-smoove.genotyped.vcf.gz"
+   }
+  }
+    
   call StructuralVariantsAnnotating {
     input:
+
   }
+  
+  task StructuralVariantsAnnotating {
+    input {
+      File input_gff
+      
       
         
 
