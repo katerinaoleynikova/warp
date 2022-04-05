@@ -260,7 +260,7 @@ workflow WholeGenomeGermlineSingleSample {
       set -o errexit
       smoove annotate \
       --gff ~{input_gff} \
-      ~{smoove_vcf} | bgzip -c > 
+      ~{smoove_vcf} | bgzip -c
       --gff ~{gff} ~{project_id}.smoove.square.vcf.gz | bgzip -c
     }
     
