@@ -229,6 +229,11 @@ workflow WholeGenomeGermlineSingleSample {
       --genotype ~{bamFile} \
       --outdir ~{output_dir} 
     }
+    
+  call StructuralVariantsAnnotating {
+    input:
+  }
+      
         
 
   # Outputs that will be retained when execution is complete
