@@ -226,7 +226,7 @@ workflow WholeGenomeGermlineSingleSample {
       smoove call \
       --name ~{sample_name} \
       --fasta ~{ref_fasta} \
-      --genotype ~{bamFile} \
+      --genotype ~{input_bam} \
       --outdir ~{output_dir} 
     }
     
