@@ -222,9 +222,14 @@ workflow WholeGenomeGermlineSingleSample {
       set -eou pipefail
       set -o nounset
       set -o errexit
+      mkdir -p ~{output_dir}
+      smoove call \
+      --name ~{sample} \
+      --fasta ~{ref_fasta} \
+      --genotype ~{bamFile} \
+      --outdir ~{output_dir} 
     }
         
-     
 
   # Outputs that will be retained when execution is complete
   output {
