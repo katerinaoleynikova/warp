@@ -204,14 +204,27 @@ workflow WholeGenomeGermlineSingleSample {
       input_bam_index = UnmappedBamToAlignedBam.output_bam_index,
       ref_fasta = references.reference_fasta.ref_fasta,
       ref_fasta_index = references.reference_fasta.ref_fasta_index,
-      sample_name = sample_and_unmapped_bams.sample_name,
-      
+      sample_name = sample_and_unmapped_bams.sample_name
+  }
+  
+  task StructuralVariants {
+    input { 
+      File input_bam
+      File input_bam_index
+      File ref_fasta
+      File ref_fasta_index
+      String sample_name
       String output_dir = "./smoove"
       String docker_image = "brentp/smoove:latest"  
-   }
-      
-      
-      
+    }
+    
+    command {
+      set -eou pipefail
+      set -o nounset
+      set -o errexit
+    }
+        
+     
 
   # Outputs that will be retained when execution is complete
   output {
