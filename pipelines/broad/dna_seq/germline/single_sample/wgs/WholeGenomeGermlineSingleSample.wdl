@@ -197,6 +197,21 @@ workflow WholeGenomeGermlineSingleSample {
     File provided_output_bam = UnmappedBamToAlignedBam.output_bam
     File provided_output_bam_index = UnmappedBamToAlignedBam.output_bam_index
   }
+  
+  call StructuralVariants {
+    input: 
+      input_bam = UnmappedBamToAlignedBam.output_bam,
+      input_bam_index = UnmappedBamToAlignedBam.output_bam_index,
+      ref_fasta = references.reference_fasta.ref_fasta,
+      ref_fasta_index = references.reference_fasta.ref_fasta_index,
+      sample_name = sample_and_unmapped_bams.sample_name,
+      
+      String outputDir = "./smoove"
+      
+   }
+      
+      
+      
 
   # Outputs that will be retained when execution is complete
   output {
