@@ -207,6 +207,13 @@ workflow WholeGenomeGermlineSingleSample {
       sample_name = sample_and_unmapped_bams.sample_name
   }
   
+  call StructuralVariantsAnnotating {
+    input:
+      sample_name = sample_and_unmapped_bams.sample_name
+      String output_dir = "./smoove_annotating"
+      String docker_image = "brentp/smoove:latest"  
+  }
+  
   task StructuralVariantsCalling {
     input { 
       File input_bam
@@ -214,7 +221,7 @@ workflow WholeGenomeGermlineSingleSample {
       File ref_fasta
       File ref_fasta_index
       String sample_name
-      String output_dir = "./smoove"
+      String output_dir = "./smoove_calling"
       String docker_image = "brentp/smoove:latest"  
     }
     
@@ -233,20 +240,39 @@ workflow WholeGenomeGermlineSingleSample {
     output {
       File smoove_vcf = output_dir + "/" + sample_name + "-smoove.genotyped.vcf.gz"
    }
-  }
-    
-  call StructuralVariantsAnnotating {
-    input:
-
+   
+    runtime {
+      docker: docker_image
+    }
   }
   
   task StructuralVariantsAnnotating {
     input {
+      File smoove_vcf
       File input_gff
+      String sample_name
+      String output_dir = "./smoove_annotating"
+    }
+    
+    command {
+      set -eou pipefail
+      set -o nounset
+      set -o errexit
+      smoove annotate \
+      --gff ~{input_gff} \
+      ~{smoove_vcf} | bgzip -c > 
+      --gff ${gff} ${project_id}.smoove.square.vcf.gz | bgzip --threads 1 -c
+    }
+    
+    output {
+      File smoove_annot_vcf = output_dir + "/" + sample_name + "-smoove.square.anno.vcf.gz"
+    }
+    
+    runtime {
+      docker: docker_image
+    }
+  }
       
-      
-        
-
   # Outputs that will be retained when execution is complete
   output {
     Array[File] quality_yield_metrics = UnmappedBamToAlignedBam.quality_yield_metrics
