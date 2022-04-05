@@ -206,8 +206,8 @@ workflow WholeGenomeGermlineSingleSample {
       ref_fasta_index = references.reference_fasta.ref_fasta_index,
       sample_name = sample_and_unmapped_bams.sample_name,
       
-      String outputDir = "./smoove"
-      
+      String output_dir = "./smoove"
+      String docker_image = "brentp/smoove:latest"  
    }
       
       
