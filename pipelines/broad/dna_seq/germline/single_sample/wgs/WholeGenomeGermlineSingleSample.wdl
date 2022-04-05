@@ -198,7 +198,7 @@ workflow WholeGenomeGermlineSingleSample {
     File provided_output_bam_index = UnmappedBamToAlignedBam.output_bam_index
   }
   
-  call StructuralVariants {
+  call StructuralVariantsCalling {
     input: 
       input_bam = UnmappedBamToAlignedBam.output_bam,
       input_bam_index = UnmappedBamToAlignedBam.output_bam_index,
@@ -207,7 +207,7 @@ workflow WholeGenomeGermlineSingleSample {
       sample_name = sample_and_unmapped_bams.sample_name
   }
   
-  task StructuralVariants {
+  task StructuralVariantsCalling {
     input { 
       File input_bam
       File input_bam_index
